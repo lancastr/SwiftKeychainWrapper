@@ -7,7 +7,12 @@
 //
 
 import XCTest
-import SwiftKeychainWrapper
+
+#if os(OSX)
+    import SwiftKeychainWrapperOSX
+#elseif os(iOS)
+    import SwiftKeychainWrapper
+#endif
 
 class KeychainWrapperDefaultWrapperTests: XCTestCase {
     let testKey = "acessorTestKey"
@@ -209,9 +214,10 @@ class KeychainWrapperDefaultWrapperTests: XCTestCase {
     }
 
     func testKeysOneKey() {
-        KeychainWrapper.standard.set(testString, forKey: testKey)
+        let result = KeychainWrapper.standard.set("testString", forKey: testKey)
 
         let keys = KeychainWrapper.standard.allKeys()
+        print(keys)
         XCTAssertEqual(keys, [testKey], "Keychain should contain the inserted key")
     }
 

@@ -7,7 +7,12 @@
 //
 
 import XCTest
-import SwiftKeychainWrapper
+
+#if os(OSX)
+    import SwiftKeychainWrapperOSX
+#elseif os(iOS)
+    import SwiftKeychainWrapper
+#endif
 
 class KeychainWrapperDeleteTests: XCTestCase {
     let testKey = "deleteTestKey"

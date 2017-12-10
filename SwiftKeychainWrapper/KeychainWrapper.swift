@@ -131,9 +131,8 @@ open class KeychainWrapper {
         var keys = Set<String>()
         if let results = result as? [[AnyHashable: Any]] {
             for attributes in results {
-                if let accountData = attributes[SecAttrAccount] as? Data,
-                    let account = String(data: accountData, encoding: String.Encoding.utf8) {
-                    keys.insert(account)
+                if let accountName = attributes[SecAttrAccount] as? String {
+                    keys.insert(accountName)
                 }
             }
         }
@@ -437,7 +436,7 @@ open class KeychainWrapper {
         
         keychainQueryDictionary[SecAttrGeneric] = encodedIdentifier
         
-        keychainQueryDictionary[SecAttrAccount] = encodedIdentifier
+        keychainQueryDictionary[SecAttrAccount] = key
         
         return keychainQueryDictionary
     }
