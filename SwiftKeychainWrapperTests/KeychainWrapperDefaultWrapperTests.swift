@@ -12,6 +12,8 @@ import XCTest
     import SwiftKeychainWrapperOSX
 #elseif os(iOS)
     import SwiftKeychainWrapper
+#elseif os(tvOS)
+    import SwiftKeychainWrapperTvOS
 #endif
 
 class KeychainWrapperDefaultWrapperTests: XCTestCase {
